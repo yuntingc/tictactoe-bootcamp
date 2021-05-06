@@ -1,3 +1,1 @@
-# Rocket Academy Coding Bootcamp
-
-## Tic Tac Toe
+# Rocket Academy Coding Bootcamp: Tic Tac Toe
