@@ -1,5 +1,5 @@
 {
-  "name": "tictactoe-swe1",
+  "name": "tictactoe-bootcamp",
   "version": "1.0.0",
   "description": "SWE1 Tic Tac Toe",
   "main": "script.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rocketacademy/tictactoe-swe1.git"
+    "url": "git+https://github.com/rocketacademy/tictactoe-bootcamp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rocketacademy/tictactoe-swe1/issues"
+    "url": "https://github.com/rocketacademy/tictactoe-bootcamp/issues"
   },
-  "homepage": "https://github.com/rocketacademy/tictactoe-swe1#readme",
+  "homepage": "https://github.com/rocketacademy/tictactoe-bootcamp#readme",
   "devDependencies": {
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
