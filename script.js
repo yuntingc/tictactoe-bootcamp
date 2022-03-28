@@ -2,7 +2,7 @@
 
 
 // ===== GLOBAL VARIABLES =====
-const board = [ 
+let board = [ 
   ['', '', ''], 
   ['', '', ''], 
   ['', '', '']
@@ -12,6 +12,8 @@ let boardContainer;
 let boardElement; 
 
 let currentPlayer = 'X';
+
+let gameInfo;
 
 
 // ===== HELPER FUNCTIONS =====
@@ -39,6 +41,25 @@ const buildBoard = (board) => {
   }
 };
 
+const buildMsgBoard = (msg) => {
+  gameInfo = document.createElement('div');
+  gameInfo.innerText = msg;
+  document.body.appendChild(gameInfo);
+}
+
+const resetGame = () => {
+  board = [ 
+    ['', '', ''], 
+    ['', '', ''], 
+    ['', '', '']
+  ];
+  currentPlayer = 'X'
+  gameInfo.innerText = '';
+  boardContainer.innerText = '';
+
+  initGame();
+}
+
 
 // GAME PLAY LOGIC
 
@@ -57,9 +78,14 @@ const squareClick = (column, row) => {
 
     // to draw board with latest array
     buildBoard(board);
+    gameInfo.innerText = "";
     
     if (checkWin(board) === true) {
-      console.log(currentPlayer, "win");
+      gameInfo.innerText = currentPlayer + " wins"
+      setTimeout( () => {
+        resetGame();
+      }, 1000)
+
     }
 
     // to change players
@@ -99,6 +125,9 @@ const checkWin = (board) => {
 // ===== GAME INITIALISATION LOGIC =====
 
 const initGame = () => {
+
+  buildMsgBoard("click on any square to start");
+
   boardContainer = document.createElement('div');
   document.body.appendChild(boardContainer);
 
