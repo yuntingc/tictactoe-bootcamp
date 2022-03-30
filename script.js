@@ -2,11 +2,8 @@
 
 
 // ===== GLOBAL VARIABLES =====
-let board = [ 
-  ['', '', ''], 
-  ['', '', ''], 
-  ['', '', '']
-];
+let board = [];
+let boardSize = 0; 
 
 let boardContainer;
 let boardElement; 
@@ -14,6 +11,20 @@ let boardElement;
 let currentPlayer = 'X';
 
 let gameInfo;
+
+const userInput = document.createElement('input');
+userInput.placeholder = "Enter board size"
+document.body.appendChild(userInput);
+
+const submitButton = document.createElement('button')
+submitButton.innerText = 'Submit';
+document.body.appendChild(submitButton);
+
+submitButton.addEventListener('click', () => {
+  boardSize = userInput.value;
+  buildBoardArray(boardSize);
+  initGame();
+})
 
 
 // ===== HELPER FUNCTIONS =====
@@ -60,6 +71,16 @@ const resetGame = () => {
   initGame();
 }
 
+const buildBoardArray = (size) => {
+  for (let i = 0; i < size; i += 1) {
+    let boardRow = [];
+    for (let j = 0; j < size; j += 1) {
+      boardRow.push("");
+    }
+    board.push(boardRow);
+  }
+}
+
 
 // GAME PLAY LOGIC
 
@@ -87,7 +108,7 @@ const squareClick = (column, row) => {
       }, 1000)
 
     }
-
+    console.log('currentPlayer: ', currentPlayer);
     // to change players
     togglePlayer();
   } 
@@ -98,7 +119,43 @@ const checkWin = (board) => {
 
   // check every position for all possibilities of winning combinations
 
-  for (let i = 0; i < board.length; i += 1) {
+ 
+  for (let i = 0; i < board.length-2; i += 1) {
+
+    for (let j = 0; j < board.length-2; j += 1) {
+
+      // for horizontal rows
+      if (board[i][j] === board[i][j+1] && board[i][j+1] === board[i][j+2] && board[i][j] !== '') {
+        return true;
+      }
+
+      // for vertical rows
+      if (board[i][j] === board[i+1][j] && board[i+1][j] === board[i+2][j] && board[i][j] !== '') {
+        return true;
+      }
+
+      // for diagonals from top left to bottom right
+      if (board[i][j] === board[i+1][j+1] && board[i+1][j+1] === board[i+2][j+2] && board[i][j] !== '') {
+        console.log('top left diagonal');
+        return true;
+    }
+
+      // for diagonals from top right to bottom left
+      if (board[i][j+2] === board[i+1][j+1] && board[i+1][j+1] === board[i+2][j] && board[i][j+2] !== '') {
+        console.log('top right diagonal');
+        return true;
+    }
+
+    }
+
+
+  }
+
+
+
+  /*
+
+  for (let i = 0; i < board.length-2; i += 1) {
     
     // for all horizontal rows
     if (board[i][0] === board[i][1] && board[i][1] === board[i][2] && board[i][0] !== '') {
@@ -125,8 +182,7 @@ const checkWin = (board) => {
       return true;
     }
 
-
-  }
+  }*/
 
   /*
   // for all horizontal rows
@@ -167,5 +223,5 @@ const initGame = () => {
   buildBoard(board);
 };
 
-initGame();
+
 
