@@ -31,6 +31,8 @@ const squareClick = (column, row) => {
     console.log('currentPlayer: ', currentPlayer);
     // to change players
     togglePlayer();
+    console.log('currentPlayer: ', currentPlayer);
+    compTurn();
   } 
 };
 
@@ -69,6 +71,20 @@ const checkWin = (squaresToWin, clickedSquareI, clickedSquareJ) => {
     
 }
 
+const compTurn = () => {
+
+  compSquareI = randomNum(boardSize);
+  compSquareJ = randomNum(boardSize);
+
+  if (board[compSquareI][compSquareJ] === "") {
+    board[compSquareI][compSquareJ] = currentPlayer;
+    buildBoard(board);
+    togglePlayer();
+  } else {
+    return compTurn();
+  }
+
+}
 
 // ===== GAME INITIALISATION LOGIC =====
 
