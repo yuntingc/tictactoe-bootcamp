@@ -1,6 +1,41 @@
 // Please implement exercise logic here
 
 
+// in progress
+
+const compBlockWin = () => {
+  //console.log('enter comp block win')
+  if (currentPlayer === "O"){
+  for (let i = 0; i < board.length; i += 1) {
+    for (let j = 0; j < board.length; j += 1) {
+      
+      if (board[i][j] === '') {
+        //togglePlayer() // computer
+        board[i][j] = 'X'; // to input 'X'
+        //togglePlayer(); // player
+        //buildBoard(board)
+        //console.log(board)
+        
+        //console.log('the board:' ,board, i, j, board[i][j])
+        const isWin = checkWin(squaresToWin, i, j);
+        console.log(isWin);
+        if (checkWin(squaresToWin, i, j) === true) {
+      
+          board[i][j] = currentPlayer;
+         
+          console.log(' player winning next turn!! ', currentPlayer);
+        } else {
+          console.log('End')
+          board[i][j] = "";
+        }
+      }
+    }
+    }
+  }
+   togglePlayer(); // to end turn
+} 
+
+
 // GAME PLAY LOGIC
 
 const togglePlayer = () => {
@@ -36,15 +71,15 @@ const squareClick = (column, row) => {
   } 
 };
 
-const checkWin = (squaresToWin, clickedSquareI, clickedSquareJ) => {
-  verticalUp = addAllAbove(count, clickedSquareI, clickedSquareJ);
-  verticalDown = addAllBelow(count, clickedSquareI, clickedSquareJ);
-  horizontalLeft = addAllLeft(count, clickedSquareI, clickedSquareJ);
-  horizontalRight = addAllRight(count, clickedSquareI, clickedSquareJ);
-  topLeftDiagonal = addTopLeft(count, clickedSquareI, clickedSquareJ);
-  bottomRightDiagonal = addBottomRight(count, clickedSquareI, clickedSquareJ);
-  topRightDiagonal = addTopRight(count, clickedSquareI, clickedSquareJ);
-  bottomLeftDiagonal = addBottomLeft(count, clickedSquareI, clickedSquareJ);
+const checkWin = (squaresToWin, i, j) => {
+  verticalUp = addAllAbove(count, i, j);
+  verticalDown = addAllBelow(count, i, j);
+  horizontalLeft = addAllLeft(count, i, j);
+  horizontalRight = addAllRight(count, i, j);
+  topLeftDiagonal = addTopLeft(count, i, j);
+  bottomRightDiagonal = addBottomRight(count, i, j);
+  topRightDiagonal = addTopRight(count, i, j);
+  bottomLeftDiagonal = addBottomLeft(count, i, j);
 
   //console.log('verticalUp: ', verticalUp)
   //console.log('verticalDown: ', verticalDown)
@@ -67,12 +102,19 @@ const checkWin = (squaresToWin, clickedSquareI, clickedSquareJ) => {
   (1 + topLeftDiagonal + bottomRightDiagonal >= squaresToWin) ||
   (1 + topRightDiagonal + bottomLeftDiagonal >= squaresToWin) ) {
     return true;
+  } else {
+    return false;
   }
     
 }
 
 const compTurn = () => {
 
+  compBlockWin();
+
+  /*
+  if (playerTurn = "O") { 
+    
   compSquareI = randomNum(boardSize);
   compSquareJ = randomNum(boardSize);
 
@@ -81,8 +123,8 @@ const compTurn = () => {
     buildBoard(board);
     togglePlayer();
   } else {
-    return compTurn();
-  }
+    compTurn();
+  }} */
 
 }
 
@@ -97,8 +139,6 @@ const initGame = () => {
 
   buildBoard(board);
 };
-
-
 
 
 
