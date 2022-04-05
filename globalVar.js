@@ -54,3 +54,6 @@ let topLeftDiagonal = 0
 let bottomRightDiagonal = 0;
 let topRightDiagonal = 0;
 let bottomLeftDiagonal = 0;
+
+// to ensure that computer only goes once
+let compFirstTurn = true;

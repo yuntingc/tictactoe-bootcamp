@@ -5,13 +5,13 @@
 
 const compBlockWin = () => {
   //console.log('enter comp block win')
-  if (currentPlayer === "O"){
+  if (currentPlayer === "O"){ // current player is computer
   for (let i = 0; i < board.length; i += 1) {
     for (let j = 0; j < board.length; j += 1) {
       
-      if (board[i][j] === '') {
-        //togglePlayer() // computer
-        board[i][j] = 'X'; // to input 'X'
+      if (board[i][j] === '' && compFirstTurn===true) {
+        togglePlayer() // toggle to player turn
+        board[i][j] = currentPlayer; // to input 'X'
         //togglePlayer(); // player
         //buildBoard(board)
         //console.log(board)
@@ -19,20 +19,23 @@ const compBlockWin = () => {
         //console.log('the board:' ,board, i, j, board[i][j])
         const isWin = checkWin(squaresToWin, i, j);
         console.log(isWin);
-        if (checkWin(squaresToWin, i, j) === true) {
-      
+        if (checkWin(squaresToWin, i, j) === true) { // if checkWin for 'X' is true
+          togglePlayer(); // toggle back to computer turn
           board[i][j] = currentPlayer;
-         
+          compFirstTurn = false;
+          buildBoard(board);
+          togglePlayer();
           console.log(' player winning next turn!! ', currentPlayer);
         } else {
           console.log('End')
           board[i][j] = "";
+          togglePlayer() // toggle back to computer turn
         }
       }
     }
     }
   }
-   togglePlayer(); // to end turn
+   //togglePlayer(); // to end turn
 } 
 
 
@@ -111,9 +114,9 @@ const checkWin = (squaresToWin, i, j) => {
 const compTurn = () => {
 
   compBlockWin();
+  
 
-  /*
-  if (playerTurn = "O") { 
+  if (playerTurn = "O" && compFirstTurn === true) { 
     
   compSquareI = randomNum(boardSize);
   compSquareJ = randomNum(boardSize);
@@ -124,8 +127,9 @@ const compTurn = () => {
     togglePlayer();
   } else {
     compTurn();
-  }} */
-
+  }} 
+  
+  compFirstTurn = true;
 }
 
 // ===== GAME INITIALISATION LOGIC =====
